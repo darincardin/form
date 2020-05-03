@@ -1,0 +1,135 @@
+	
+	
+	table  {
+        width:100%;
+		
+		
+		tr {
+			height: 45px;
+			
+			td {
+				padding-bottom: 10px;
+			}
+			
+			td:first-child{
+				width: 200px;
+			}
+		}
+
+    }
+			
+
+	.control-label {
+	    text-align: right;
+        width: 100%;
+        padding-top: 0px!important;
+	    margin-bottom: 0px!important;
+		padding-top: 0!important;
+		padding-right: 40px;
+	}
+	
+	.control-label.required:after {
+        content: "*";
+        display: inline;
+        color: red;
+        position: absolute;
+        margin-left: 5px;
+    }
+	
+	
+
+
+
+
+	[name=my-fName]{
+	    width:100%;
+		max-width: 300px;
+	}
+	
+	[name=my-lName]{
+	    width:100%;
+		max-width: 300px;
+	}
+	
+	[name=my-quantity]{
+	    width:100%;
+		max-width: 100px;
+	}
+	
+	[name=my-phone]{
+	    width:100%;
+		max-width: 200px;
+	}
+	
+	
+	[name=my-address]{
+	    width:100%;
+		max-width: 500px;
+	}
+		
+
+
+
+	textarea{
+		resize: none;
+        height: 70px!important;
+		text-overflow: ellipsis;
+		resize: none;
+	}	
+	
+
+	.form-group {
+		margin-bottom: 0!important;
+	}
+		
+
+	
+
+
+	.glyphicon-ok, .glyphicon-remove{
+		display:none;
+	}
+
+	.has-success .glyphicon-ok{
+		display:block;
+	}
+	
+	.has-error .glyphicon-remove{
+		display:block
+	}
+
+
+    @media screen and  (max-width : 540px) {
+
+
+
+		table td:first-child{
+				width: 10px;
+				text-align:left;
+		}
+
+		.control-label {
+
+			padding-right: 15px; 
+		}
+    }    
+
+	
+	
+	.popover{
+		font-weight: 700;
+		white-space:nowrap;
+	}
+		
+		
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
