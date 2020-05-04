@@ -14,7 +14,7 @@ module.exports = (env) => {
 	  output: {
 		path: path.resolve(__dirname, 'dist'), 
 		filename: 'index.js',
-		library: ['form'],
+	//	library: ['form'],
 		libraryTarget: 'umd',
 		publicPath:'/dist'
 	  },

@@ -1,4 +1,4 @@
 
 import Form from './dist';
 
-export {Form}
+export default Form;
