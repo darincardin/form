@@ -6,6 +6,7 @@ import Form from "./Form/Form.jsx";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 
+
 class Main extends React.Component {
 	
 	state = {object: {} }	

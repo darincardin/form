@@ -6,6 +6,12 @@ import Phone from './Inputs/Phone.jsx';
 
 const newOrder = {id:"", fName:"", lName:"", quantity:"", phone:"", address:""}
 
+
+
+//import 'bootstrap/dist/css/bootstrap.css';
+//import 'bootstrap/dist/js/bootstrap.js';
+
+
 import './style.scss';
 
 class Form extends React.Component {

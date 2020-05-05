@@ -21,6 +21,10 @@ module.exports = (env) => {
 		filename: '[name].js',
 	  },
       plugins: plugins,
+	  
+	  externals: { $: "jquery" },
+	
+	
 	  devServer: {
 		contentBase:  require('path').join(__dirname, "src"),
 		publicPath: '/',

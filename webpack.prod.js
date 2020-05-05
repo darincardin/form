@@ -5,7 +5,7 @@ module.exports = (env) => {
 	
 	
 	var plugins = [ 
-		new webpack.ProvidePlugin({ $: "jquery", jQuery: "jquery" }) 
+	//	new webpack.ProvidePlugin({ $: "jquery", jQuery: "jquery" }) 
 	];
 	
 	return  {
@@ -17,6 +17,7 @@ module.exports = (env) => {
 		libraryTarget: 'umd',
 		publicPath:'/dist'
 	  },
+	//  externals: ['bootstrap','$'  ],
 	  plugins: plugins,
 	  module: {
 		rules: [
