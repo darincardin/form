@@ -1,5 +1,6 @@
 	
-	
+form {
+
 	table  {
         width:100%;
 		
@@ -7,15 +8,9 @@
 		tr {
 			height: 45px;
 			
-			td {
-				padding-bottom: 10px;
-			}
-			
-			td:first-child{
-				width: 200px;
-			}
+			td { padding-bottom: 10px;	}
+			td:first-child{	width: 200px;	}
 		}
-
     }
 			
 
@@ -122,7 +117,7 @@
 	}
 		
 		
-	
+}
 	
 
 	

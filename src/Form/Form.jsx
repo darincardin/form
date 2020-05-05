@@ -1,15 +1,11 @@
 import React from 'react';
 
-
 import Text from './Inputs/Text.jsx';
 import Number from './Inputs/Number.jsx';
 import Phone from './Inputs/Phone.jsx';
 
 const newOrder = {id:"", fName:"", lName:"", quantity:"", phone:"", address:""}
 
-
-import 'bootstrap';
-import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import './style.scss';
 
 class Form extends React.Component {

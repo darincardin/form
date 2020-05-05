@@ -5,7 +5,7 @@ var webpack = require('webpack');
 module.exports = (env) => {
 
 	var plugins = [ 
-		new webpack.ProvidePlugin({   $: "jquery", jQuery: "jquery", _: 'underscore' }) ,
+		new webpack.ProvidePlugin({  $: "jquery", 	jQuery: "jquery"})
 	];
 	
 	
