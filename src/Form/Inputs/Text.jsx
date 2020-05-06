@@ -4,15 +4,6 @@ import ReactDOM from 'react-dom';
 
 const messages = {required:"Required", phone:"Format is xxx-xxx-xxxx"};
 
-
-
-
-
-
-
-
-
-
 class Text extends React.Component {
 
 	constructor(props){
@@ -33,7 +24,6 @@ class Text extends React.Component {
 	}
 	
 	componentDidMount() {
-		console.log($('body').height());
 		this.validate( this.props.state.object[this.props.name]);
 	    this.ttip = tooltip(this.elem.current);
 	}
