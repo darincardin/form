@@ -12,16 +12,16 @@ The widget can then be included in the project like this:
 ```jsx
 import Form from 'form'; 
 
-var state = {object: {} }	
+var state = { object: {} }	
 	
 var inputs = [ 
-		{label:"First Name", name:"fName", tag:"Text"},
-		{label:"Last Name",  name:"lName", tag:"Text"},
-		{label:"Phone",      name:"phone", tag:"Phone"},
+	{label:"First Name", name:"fName", tag:"Text"},
+	{label:"Last Name",  name:"lName", tag:"Text"},
+	{label:"Phone",      name:"phone", tag:"Phone"},
 ]	
 
 var onSuccess = (result)=>{
-		console.log(result);
+	console.log(result);
 }
 
 <Form  onSuccess={this.onSuccess} object={this.state.order}   inputs={this.inputs}>
