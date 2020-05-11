@@ -6,7 +6,7 @@ import Form from "./Form/Form.jsx";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 
-const newOrder = { fName:"dar", lName:"d", phone:"111-111-2222",  amount:""}
+const newOrder = { fName:"", lName:"", phone:"",  amount:""}
 
 
 class Main extends React.Component {

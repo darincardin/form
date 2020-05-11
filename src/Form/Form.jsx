@@ -22,14 +22,15 @@ class Form extends React.Component {
 	}
 	
 	isValid = ()=> {
-
 		return Object.keys(this.state.errors).every( v => (
 			!this.state.errors[v]
 		))
 	}
 	
 	componentWillReceiveProps(props) {
-		this.setState({object:props.object, submitted:false});
+		
+		
+		//this.setState({object:props.object, submitted:false});
 	}
 
 	onSubmit = (e)=> {
@@ -52,7 +53,6 @@ class Form extends React.Component {
 	
 	Input = function(attrs){
 		switch(attrs.tag){
-			
 			case "phone":  return <Phone  {...attrs} />
 			case "number": return <Number  {...attrs} />
 			default:       return <Text  {...attrs} />
@@ -70,7 +70,7 @@ class Form extends React.Component {
 						{	
 							this.props.inputs.map( i =>(
 								<tr key={i.name}>
-									<td><label className="control-label required">{i.label}</label></td>
+									<td><label className={'control-label ' + (i.required ? 'required':'')}>{i.label}</label></td>
 									<td>
 										<Input {...i} value={this.state.object[i.name]} error={this.state.errors[i.name] } submitted={this.state.submitted} change={this.change}  />
 									</td>
