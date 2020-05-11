@@ -10,38 +10,46 @@ class Text extends React.Component {
 		this.elem = React.createRef();
 	}
 	
-	onChange = (e)=>{
-		this.props.change(e);
-		this.validate(e.target.value);	
-	}
-	
-	validate(value){  
-		if(this.props.required && !value ) this.props.state.errors[this.props.name]  = 'required';
-		
-		else if(this.props.validation && !this.props.validation(value)){}
-		else delete  this.props.state.errors[this.props.name];		
-	}
-	
 	componentDidMount() {
-		this.validate( this.props.state.object[this.props.name]);
 	    this.ttip = tooltip(this.elem.current);
 	}
 	
+	onChange = e =>{
+		var {name, value} = e.target;
+
+		this.props.change({
+			object: { [name]: value},
+			errors: { [name]: this.validate(value)}
+		})
+	}
+	
+	validate(value){  
+		var result;
+		
+		if(this.props.validation) {
+			result = this.props.validation(value);
+			if(result) return result;
+		}
+	
+		return (this.props.required && !value ) ? 'required' : '' ;
+	}
+
 	onWatch = () =>{
-		var error = this.props.state.errors[this.props.name];
+		var error = this.props.error;
 			
-		if(this.props.state.submitted) error ? this.ttip.show(messages[error]) : this.ttip.hide();
+		if(this.props.submitted) error ? this.ttip.show(messages[error]) : this.ttip.hide();
 	}
 
 	render(){ 
-		
+	
 		var className = ["form-group has-feedback"];
-		if(this.props.state.submitted) className.push( !this.props.state.errors[this.props.name] ? "has-success" :"has-error" );
+			
+		if(this.props.submitted) className.push( !this.props.error ? "has-success" :"has-error" );
 	
 		var attribs = {
 			type: this.props.type || "text",
 			name: this.props.name,
-			defaultValue:  this.props.state.object[this.props.name],
+			defaultValue:  this.props.value,
 			onFocus:this.onWatch,
 			onKeyUp:this.onWatch,
 			onChange: this.onChange,

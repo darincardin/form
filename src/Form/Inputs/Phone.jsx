@@ -6,15 +6,11 @@ var pattern = /^\d{3}-\d{3}-\d{4}$/;
 
 var Phone = props=>{
 	
-	var validate = value=>{
-		
-		if(pattern.test(value)) return true;
-		
-		props.state.errors[props.name] = "phone";
-		return false;	
+	var validate = (value) =>{  
+		return (value && !pattern.test(value) ) ? 'phone' : '' ;
 	}
 	
-	return ( <Text type="text" {...props} validation={validate} required /> ) 	
+	return ( <Text type="text" {...props} validation={validate}  /> ) 	
 }
 export default Phone;
 
