@@ -26,12 +26,6 @@ class Form extends React.Component {
 			!this.state.errors[v]
 		))
 	}
-	
-	componentWillReceiveProps(props) {
-		
-		
-		//this.setState({object:props.object, submitted:false});
-	}
 
 	onSubmit = (e)=> {
 	
