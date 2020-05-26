@@ -4,12 +4,9 @@ import Text from './Inputs/Text.jsx';
 import Number from './Inputs/Number.jsx';
 import Phone from './Inputs/Phone.jsx';
 
-
 import Validation from './Inputs/Validation.js';
 
 import './style.scss';
-
-
 
 class Form extends React.Component {
 
@@ -21,7 +18,6 @@ class Form extends React.Component {
 	
 	constructor(props) {
 		super(props)		
-		debugger;
 		this.state.errors = Validation.validate(this.props.inputs, this.state.object);
 	}
 	
