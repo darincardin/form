@@ -33,7 +33,9 @@ class Form extends React.Component {
 		this.setState({submitted:true});
 			
 		if(Validation.isValid(this.state.errors)){
-			this.props.onSuccess(this.state.object)
+			this.props.onSuccess(this.state.object, ()=>{
+				this.setState({submitted:false});
+			})	
 		}
 	}
 

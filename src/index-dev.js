@@ -15,7 +15,7 @@ const	inputs = [
 	{label:"ID", 		 name:"id",     tag:"label"},
 	{label:"First Name", name:"fName",  tag:"text",   required:true},
 	{label:"Last Name",  name:"lName",  tag:"text",   required:true},
-	{label:"Phone",      name:"phone",  tag:"phone",   required:true},
+	{label:"Phone",      name:"phone",  tag:"phone"},
 	{label:"Amount",     name:"amount", tag:"number"}
 ]	
 
@@ -23,7 +23,7 @@ class Main extends React.Component {
 	
     state = {object: {...newOrder}, inputs:[...inputs] }	
 
-	onSuccess = (data)=>{
+	onSuccess = (data, callback)=>{
 
 		var result = "";
 		
@@ -32,6 +32,7 @@ class Main extends React.Component {
 		))
 		
 		alert(result);
+		setTimeout(() => callback(), 500);
 	}
 	
 	updateData = () =>{
