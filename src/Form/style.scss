@@ -57,7 +57,11 @@ form {
 	    width:100%;
 		max-width: 500px;
 	}
-		
+	
+	[name=my-amount]{
+	    width:100%;
+		max-width: 100px;
+	}	
 	textarea{
 		resize: none;
         height: 70px!important;

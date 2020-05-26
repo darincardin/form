@@ -6,19 +6,22 @@ import Form from "./Form/Form.jsx";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 
-const newOrder = { fName:"", lName:"", phone:"",  amount:""}
 
+
+const newOrder = { id:"1", fName:"", lName:"", phone:"",  amount:""}
+
+	
+const	inputs = [ 
+	{label:"ID", 		 name:"id",     tag:"label"},
+	{label:"First Name", name:"fName",  tag:"text",   required:true},
+	{label:"Last Name",  name:"lName",  tag:"text",   required:true},
+	{label:"Phone",      name:"phone",  tag:"phone",   required:true},
+	{label:"Amount",     name:"amount", tag:"number"}
+]	
 
 class Main extends React.Component {
 	
-	state = {object: {...newOrder} }	
-	
-	inputs = [ 
-		{label:"First Name", name:"fName",  tag:"text",  required:true},
-		{label:"Last Name",  name:"lName",  tag:"text",  required:true},
-		{label:"Phone",      name:"phone",  tag:"phone"},
-		{label:"Amount",     name:"amount", tag:"number"},
-	]	
+    state = {object: {...newOrder}, inputs:[...inputs] }	
 
 	onSuccess = (data)=>{
 
@@ -31,11 +34,20 @@ class Main extends React.Component {
 		alert(result);
 	}
 	
+	updateData = () =>{
+		this.setState( {object: {...newOrder} } )
+	}
+
 	render = ()=>{
 		return (
-			<div style={{width: '500px', margin:'auto'}}>
-				<Form  onSuccess={this.onSuccess} object={this.state.object}  inputs={this.inputs}>
-					<button type="submit" className="btn btn-primary">Submit</button> 
+			<div style={{width: '450px', margin:'auto'}}>
+
+				
+
+				<Form object={this.state.object} onSuccess={this.onSuccess}   inputs={this.state.inputs}>
+					<button className="btn btn-primary" type="submit" >Submit</button> 
+					&nbsp;
+					<button className="btn btn-default" type="text" onClick={this.updateData}>Clear</button>
 				</Form>
 			</div>
 		)
@@ -44,4 +56,3 @@ class Main extends React.Component {
 
 
 ReactDOM.render( <Main />, document.getElementById('app'));
-

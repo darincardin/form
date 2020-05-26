@@ -4,35 +4,39 @@ import Text from './Inputs/Text.jsx';
 import Number from './Inputs/Number.jsx';
 import Phone from './Inputs/Phone.jsx';
 
+
+import Validation from './Inputs/Validation.js';
+
 import './style.scss';
+
+
 
 class Form extends React.Component {
 
 	state =  { 
-	    object:  {...this.props.object},
+	    object:  this.props.object,
 		submitted: false,
 		errors:{}	
 	}
 	
 	constructor(props) {
-		super(props)
-		this.props.inputs.map( i =>{	
-			if(i.required && !this.state.object[i.name]) this.state.errors[i.name] = 'required'
-		})	
+		super(props)		
+		debugger;
+		this.state.errors = Validation.validate(this.props.inputs, this.state.object);
 	}
 	
-	isValid = ()=> {
-		return Object.keys(this.state.errors).every( v => (
-			!this.state.errors[v]
-		))
-	}
+	init(){
+		var errors = Validation.validate(this.props.inputs, this.state.object);	
+		this.setState( {errors:errors} );
+	}	
+	
 
 	onSubmit = (e)=> {
 	
 		e.preventDefault()
 		this.setState({submitted:true});
 			
-		if(this.isValid()){
+		if(Validation.isValid(this.state.errors)){
 			this.props.onSuccess(this.state.object)
 		}
 	}
@@ -48,10 +52,15 @@ class Form extends React.Component {
 	Input = function(attrs){
 		switch(attrs.tag){
 			case "phone":  return <Phone  {...attrs} />
-			case "number": return <Number  {...attrs} />
-			default:       return <Text  {...attrs} />
+			case "number": return <Number {...attrs} />
+			case "label": return  <div>{attrs.value}</div>
+			default:       return <Text   {...attrs} />
 		}					
 	}	
+
+	componentWillReceiveProps(props) {
+		this.setState({object: props.object }, this.init) 
+	}
 	
 	render() {
 		var Input = this.Input;
@@ -59,12 +68,12 @@ class Form extends React.Component {
 		return (
 			<form onSubmit={this.onSubmit}>
 				<table>
-					{this.state.object &&
+					{this.props.inputs &&
 						<tbody>
 						{	
 							this.props.inputs.map( i =>(
 								<tr key={i.name}>
-									<td><label className={'control-label ' + (i.required ? 'required':'')}>{i.label}</label></td>
+									<td><label className={'control-label ' + (i.required ? 'required':'')}>	{i.label}</label></td>
 									<td>
 										<Input {...i} value={this.state.object[i.name]} error={this.state.errors[i.name] } submitted={this.state.submitted} change={this.change}  />
 									</td>
