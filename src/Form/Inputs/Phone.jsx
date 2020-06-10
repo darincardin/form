@@ -10,7 +10,7 @@ var pattern = /^\d{3}-\d{3}-\d{4}$/;
 var Phone = props=>{
 	
 	var validate = value =>{  
-		return Validation.phone(value) ? 'phone' : '';
+		return Validation.phone(value)
 	}
 	
 	return ( <Text type="text" {...props} validation={validate}  /> ) 	

@@ -1,6 +1,5 @@
 import React from 'react';
 import tooltip from './Tooltip.jsx';
-
 import Validation from './Validation.js';
 
 const messages = {required:"Required", phone:"Format is xxx-xxx-xxxx"};
@@ -35,14 +34,14 @@ class Text extends React.Component {
 	
 	validate(value){  
 		var result;
-		
+	
 		if(this.props.validation) {
 			result = this.props.validation(value);
 			if(result) return result;
 		}
 	
 		if(this.props.required) {
-			result = Validation.required(value) ? 'required' : '';	
+			result = Validation.required(value);
 		}
 
 		return result;

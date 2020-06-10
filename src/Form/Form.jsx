@@ -18,20 +18,18 @@ class Form extends React.Component {
 	
 	constructor(props) {
 		super(props)		
-		this.state.errors = Validation.validate(this.props.inputs, this.state.object);
+		this.state.errors = this.getErrors()
 	}
 	
-	init(){
-		var errors = Validation.validate(this.props.inputs, this.state.object);	
-		this.setState( {errors:errors} );
+	getErrors(){
+		return Validation.getErrors(this.props.inputs, this.state.object);	
 	}	
 	
 
 	onSubmit = (e)=> {
-	
 		e.preventDefault()
 		this.setState({submitted:true});
-			
+		
 		if(Validation.isValid(this.state.errors)){
 			this.props.onSuccess(this.state.object, ()=>{
 				this.setState({submitted:false});
@@ -40,8 +38,8 @@ class Form extends React.Component {
 	}
 
 	change = obj =>{	
-		var object =  {...this.state.object , ...obj.object}
-		var errors =  {...this.state.errors , ...obj.errors}	
+		var object =  {...this.state.object, ...obj.object}
+		var errors =  {...this.state.errors, ...obj.errors}	
 		var submitted = this.state.submitted;
 
 		this.setState({object, errors, submitted} )
@@ -51,13 +49,17 @@ class Form extends React.Component {
 		switch(attrs.tag){
 			case "phone":  return <Phone  {...attrs} />
 			case "number": return <Number {...attrs} />
-			case "label": return  <div>{attrs.value}</div>
+			case "label":  return <div>{attrs.value}</div>
 			default:       return <Text   {...attrs} />
 		}					
 	}	
 
 	componentWillReceiveProps(props) {
-		this.setState({object: props.object }, this.init) 
+		this.setState({object: props.object }, ()=>{
+
+			var errors = this.getErrors();
+			this.setState( {errors:errors, submitted:false} );
+		}) 
 	}
 	
 	render() {
