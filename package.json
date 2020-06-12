@@ -61,9 +61,9 @@
   "main": "dist/index.js",
   "name": "form",
   "scripts": {
-    "build": "clear && webpack --env.production=false --mode development --config webpack.prod.js",
+    "build": "clear && jest  && webpack --env.production=false --mode development --config webpack.prod.js",
     "start": "clear && webpack --env.production=false --mode development --config webpack.config.js &&  webpack-dev-server --hot --env.production=false",
-    "test": "clear && jest ./test/test.js"
+    "test": "clear && jest"
   },
   "version": "1.0.0"
 }

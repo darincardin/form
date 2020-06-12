@@ -25,7 +25,7 @@ class Text extends React.Component {
 	
 		var {name, value} = e.target;
 		this.setState({value:value})
-			
+
 		this.props.change({
 			object: { [name]: value},
 			errors: { [name]: this.validate(value)}
