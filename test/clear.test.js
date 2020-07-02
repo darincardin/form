@@ -17,7 +17,7 @@ const newOrder = { fName:"",  amount:""}
 
 console.warn = ()=>{}
 
-const	inputs = [ 
+const	fields = [ 
 
 	{label:"First Name", name:"fName",  tag:"text",   required:true},
 	{label:"Amount",     name:"amount", tag:"number"}
@@ -38,7 +38,7 @@ var clear = () =>{
 beforeEach(() => {
 	
 	wrapper = (mount(
-		<Form object={{ fName:"Darin",  amount:"8"}} onSuccess={onSuccess}   inputs={inputs}>
+		<Form object={{ fName:"Darin",  amount:"8"}} onSuccess={onSuccess}   fields={fields}>
 			<button id="submit" className="btn btn-primary" type="submit" >Submit</button> 
 			<button id="clear" className="btn btn-default" type="button" onClick={clear}>Clear</button>			
 		</Form>

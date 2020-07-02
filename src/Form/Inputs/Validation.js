@@ -13,18 +13,43 @@ var Validation = (function()  {
 		return (value && !pattern_phone.test(value) ) ? 'phone' : '' ;
 	}
 
-	var getErrors = ( inputs, obj )=>{
+	var getErrors = ( fields, obj )=>{
 		
 		var errors = {};
 		
-		inputs.map( i =>{	
-			if(i.required) errors[i.name] = required(obj[i.name]);
-
-			if(!errors[i.name] && i.tag == 'phone') errors[i.name] = phone(obj[i.name]);
-		});
 		
+		
+ 
+		
+		fields.map( f =>{	
+			
+	
+			
+			if(f.header){
+				
+				f.inputs.map(i => {
+					errors[i.name] = getError(i, obj)} 
+				)
+				
+			}
+			else errors[f.name] = getError(f, obj);
+
+			
+			
+			
+		});
+
 		return errors;	
 	}
+
+	var getError = (i, obj) =>{
+		
+		if(i.required) return  required(obj[i.name]);
+
+		if(i.tag == 'phone') return  phone(obj[i.name]);		
+		
+	}
+
 
 	var isValid = (errors)=>{
 	

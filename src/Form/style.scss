@@ -7,9 +7,24 @@ form {
 		tr {
 			height: 45px;
 			td { padding-bottom: 10px;	}
-			td:first-child{	width: 100px;	}
-		}
+			td:first-child{	
+				width: 100px;
+				@media screen and  (max-width : 540px) {
+					& {
+						width: 10px;
+						white-space:nowrap;
+						text-align:left;
+					}
+				}    
+
+			}
+		}	
     }
+			
+			
+			
+			
+	
 			
 	.control-label {
 	    text-align: right;
@@ -18,50 +33,71 @@ form {
 	    margin-bottom: 0px!important;
 		padding-top: 0!important;
 		padding-right: 20px;
-	}
+		color: #898989;
 	
-	.control-label.required:after {
-        content: "*";
-        display: inline;
-        color: red;
-        position: absolute;
-        margin-left: 5px;
-    }
+		@media screen and  (max-width : 540px) {
+			& {
+				padding-right: 15px; 
+			}
+		}    		
+						
+		
+		&.required:after {
+			content: "*";
+			display: inline;
+			color: red;
+			position: absolute;
+			margin-left: 5px;
+		}		
+	}
+		
+			
+
 	
 	.form-group {
 		margin-bottom: 0!important;
+		width:100%;
 	}
 		
+
+		
 	[name=my-fName]{
-	    width:100%;
 		max-width: 300px;
 	}
 	
 	[name=my-lName]{
-	    width:100%;
 		max-width: 300px;
 	}
 	
 	[name=my-quantity]{
-	    width:100%;
 		max-width: 100px;
 	}
 	
 	[name=my-phone]{
-	    width:100%;
 		max-width: 200px;
 	}
 	
-	
 	[name=my-address]{
-	    width:100%;
 		max-width: 500px;
 	}
 	
 	[name=my-amount]{
-	    width:100%;
 		max-width: 100px;
 	}	
+	
+	[name=my-deliver]{
+		max-width: 100px;
+	}	
+		
+	
+	
+	
+	input[type=checkbox] {
+		height: 20px;
+		width: 20px;
+		xxopacity:0;
+	}
+	
 	textarea{
 		resize: none;
         height: 70px!important;
@@ -69,32 +105,29 @@ form {
 		resize: none;
 	}	
 
-	.glyphicon-ok, 
-	.glyphicon-remove{
-		display:none;
-	}
 
-	.has-success .glyphicon-ok, 
-	.has-error .glyphicon-remove {
-		display:block;
-	}
-	
-    @media screen and  (max-width : 540px) {
 
-		table td:first-child{
-			width: 10px;
-			text-align:left;
-		}
-
-		.control-label {
-			padding-right: 15px; 
-		}
-    }    
 
 	.popover{
 		font-weight: 700;
 		white-space:nowrap;
 	}	
+	
+	
+	.header {
+		position:relative;
+		text-align:center;
+		border-bottom: solid #878787 1px;
+		span {
+			color: #898989;
+			position:relative;
+			background: #ffffff;
+			bottom: -10px;
+			padding: 0px 4px;			
+		}
+	}
+	
+	
 }
 	
 

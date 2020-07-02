@@ -16,7 +16,7 @@ var wrapper;
 
 console.warn = ()=>{}
 
-const	inputs = [ 
+const	fields = [ 
 	{label:"First Name", name:"fName",  tag:"text"},
 	{label:"Phone",      name:"phone",  tag:"phone"},
 ]	
@@ -28,7 +28,7 @@ var result = {};
 
 beforeEach(() => {
 	
-	wrapper = mount(<Form object={ {  fName:"", phone:""}} onSuccess={()=>{}}   inputs={inputs}>
+	wrapper = mount(<Form object={ {  fName:"", phone:""}} onSuccess={()=>{}}   fields={fields}>
 							<button id="submit" className="btn btn-primary" type="submit" >Submit</button> 
 						</Form>)
 

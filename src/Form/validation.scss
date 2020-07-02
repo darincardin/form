@@ -1,0 +1,29 @@
+	
+form {
+
+
+	.glyphicon-ok, 
+	.glyphicon-remove{
+		display:none;
+	}
+	
+	.has-feedback .form-control {
+		padding-right: 25.5px;
+	}	
+
+	.has-success .glyphicon-ok, 
+	.has-error .glyphicon-remove {
+		display:block;
+	}
+	
+}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	

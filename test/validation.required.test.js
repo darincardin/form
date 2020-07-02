@@ -11,13 +11,15 @@ require('bootstrap');
 console.warn = ()=>{}
 
 
-		
+const fields = [ 
+	{ 
+		header: "Customer Info", inputs: [
+			{label:"First Name", name:"fName",  tag:"text",   required:true},
+			{label:"Phone",      name:"phone",  tag:"phone",  required:true},
+		]
+	}	
+]			
 
-const	inputs = [ 
-	{label:"First Name", name:"fName",  tag:"text",   required:true},
-	{label:"Phone",      name:"phone",  tag:"phone",   required:true},
-]	
-	
 
 describe('Validation', () => {
 	
@@ -25,7 +27,7 @@ describe('Validation', () => {
 
     test('required', () => {
 		let wrapper = (mount(
-			<Form object={{ fName:"",  phone:""}} onSuccess={ ()=>{} }   inputs={inputs}>
+			<Form object={{ fName:"",  phone:""}} onSuccess={ ()=>{} }   fields={fields}>
 				<button id="submit" className="btn btn-primary" type="submit" >Submit</button> 
 			</Form>
 		));
@@ -55,6 +57,8 @@ describe('Validation', () => {
 		expect( wrapper.find('input[name="fName"]').instance().value).toBe('')
 		expect( wrapper.find('input[name="phone"]').instance().value).toBe('')
 		expect(wrapper.find('.has-error').length).toBe(2);
+		
+		expect(wrapper.find('.header').exists()).toBeTruthy()
 	
     });		
 });

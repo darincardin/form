@@ -22,7 +22,8 @@ var getEvent = (n,v)=> { return { target: {name:n, value:v} }}
 
 const newOrder = { id:"", fName:"", lName:"", phone:"",  amount:"" }
 	
-const inputs = [ 
+const fields = [ 
+	{label:"Personal Data", tag:"header"},
 	{label:"First Name", name:"fName",  tag:"text",   required:true},
 	{label:"Last Name",  name:"lName",  tag:"text",   required:true},
 	{label:"Phone",      name:"phone",  tag:"phone"},
@@ -39,7 +40,7 @@ describe('Form', () => {
     test('success', () => {
 		
 		let wrapper = (mount(
-			<Form object={newOrder} onSuccess={data=>{	result = data }}   inputs={inputs}>
+			<Form object={newOrder} onSuccess={data=>{	result = data }}   fields={fields}>
 				<button className="btn btn-primary" type="submit" >Submit</button> 
 			</Form>
 		));
@@ -62,6 +63,10 @@ describe('Form', () => {
 		wrapper.find('button').at(0).simulate('submit');
 		
 	    expect(result.fName+result.lName  ).toBe("DarinCardin");
+		
+		
+
+		expect(wrapper.find('.header').exists()).toBeTruthy()
 	});
 });
 
