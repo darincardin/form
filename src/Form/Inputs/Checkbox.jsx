@@ -46,8 +46,6 @@ class Checkbox extends React.Component {
 			onChange: this.onChange,
 		}
 
-		
-
 		return (
 			<div className={className.join(" ")} name={`my-${this.props.name}`}  >	
 			    <label>
