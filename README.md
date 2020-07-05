@@ -33,7 +33,7 @@ var onSuccess = (result)=>{
 	console.log(result);
 }
 
-<Form  onSuccess={this.onSuccess} object={this.state.order}   inputs={this.inputs}>
+<Form  onSuccess={this.onSuccess} object={this.state.order}   fields={this.inputs}>
   <button type="submit" className="btn btn-primary">Submit</button> 
 </Form>
 ```
