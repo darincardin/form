@@ -25,6 +25,8 @@ class Checkbox extends React.Component {
 		var {name, checked} = e.target;
 		this.setState({value:checked})
 		
+		
+		
 		this.props.change({
 			object: { [name]: checked},
 			errors: { [name]: this.validate(checked)}

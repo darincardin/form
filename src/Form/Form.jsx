@@ -27,13 +27,23 @@ class Form extends React.Component {
 		return Validation.getErrors(this.props.fields, this.state.object);	
 	}	
 	
-
 	onSubmit = (e)=> {
 		e.preventDefault()
 		this.setState({submitted:true});
 		
-		if(Validation.isValid(this.state.errors)){
-			this.props.onSuccess(this.state.object, ()=>{
+		if(Validation.isValid(this.props.fields, this.state.object)){
+			var obj = {};
+			
+			this.props.fields.map( f =>{
+				
+				if(!f.header) {
+					if(!f.showIf || this.state.object[f.showIf.name] == f.showIf.value)
+					   obj[f.name] = this.state.object[f.name];
+				}
+				
+			})
+			
+			this.props.onSuccess(obj, ()=>{
 				this.setState({submitted:false});
 			})	
 		}
@@ -59,14 +69,11 @@ class Form extends React.Component {
 
 	componentWillReceiveProps(props) {
 		this.setState({object: props.object }, ()=>{
-
 			var errors = this.getErrors();
 			this.setState( {errors:errors, submitted:false} );
 		}) 
 	}
 	
-	
-
 	renderHeader = i =>{
 		
 		return (
@@ -82,25 +89,27 @@ class Form extends React.Component {
 	renderInput = i =>{
 		var Input = this.Input;
 		
+		var show = (i.showIf == null || this.state.object[i.showIf.name] == i.showIf.value);
+		
 		return (
-			<tr  key={ i.name}>
-				<td><label className={'control-label ' + (i.required ? 'required':'')}>	{i.label}</label></td>
-				<td>
-					<Input {...i} value={this.state.object[i.name]} error={this.state.errors[i.name] } submitted={this.state.submitted} change={this.change}  />
-				</td>
-			</tr>
+				<tr  key={ i.name} >
+					{ show && 
+					<>
+						<td><label className={'control-label ' + (i.required ? 'required':'')}>	{i.label}</label></td>
+						<td>
+							<Input {...i} value={this.state.object[i.name]} error={this.state.errors[i.name] } submitted={this.state.submitted} change={this.change}  />
+						</td>
+					</>
+					}
+				</tr>
 		)
-	}
-	
-	
+	}	
 
 	renderData = fields => {
 		
 		return fields.map( field =>{
 
 			if(field.tag == 'header') return this.renderHeader({header:field.label})
-				
-			else if(field.header)  return  [ this.renderHeader(field), this.renderData(field.inputs) ]
 
 			else return this.renderInput(field) 
 		})	

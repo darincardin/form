@@ -13,30 +13,13 @@ var Validation = (function()  {
 		return (value && !pattern_phone.test(value) ) ? 'phone' : '' ;
 	}
 
-	var getErrors = ( fields, obj )=>{
+	var getErrors = ( fields, obj ) => {
 		
 		var errors = {};
 		
-		
-		
- 
-		
 		fields.map( f =>{	
 			
-	
-			
-			if(f.header){
-				
-				f.inputs.map(i => {
-					errors[i.name] = getError(i, obj)} 
-				)
-				
-			}
-			else errors[f.name] = getError(f, obj);
-
-			
-			
-			
+			errors[f.name] = getError(f, obj);
 		});
 
 		return errors;	
@@ -51,12 +34,35 @@ var Validation = (function()  {
 	}
 
 
-	var isValid = (errors)=>{
-	
+
+	var isValid = ( fields, obj )=>{
+		
+
+		var errors = {};
+		
+		fields.map( f =>{	
+			
+				if(f.showIf) {
+					let {name, value} = f.showIf;
+					
+					if( obj[name] == value) errors[f.name] = getError(f, obj);
+					
+					
+				}
+				else errors[f.name] = getError(f, obj);	
+		});
+		
+		
 		return Object.keys(errors).every( v => (
 			!errors[v]
-		))		
+		))	
+
 	}
+
+
+
+
+
 
     return {
 		getErrors: getErrors,
