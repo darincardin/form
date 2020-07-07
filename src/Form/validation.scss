@@ -15,7 +15,13 @@ form {
 	.has-error .glyphicon-remove {
 		display:block;
 	}
-	
+		
+	input[type=checkbox] ~ .glyphicon-ok,
+	input[type=checkbox] ~ .glyphicon-remove,
+	select ~ .glyphicon-ok,
+	select ~ .glyphicon-remove{
+		display:none!important;
+	}
 }
 	
 

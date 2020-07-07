@@ -70,7 +70,7 @@ form {
 		max-width: 300px;
 	}
 	
-	[name=my-quantity]{
+	[name=my-quantity], [name=my-amount]{
 		max-width: 100px;
 	}
 	
@@ -82,15 +82,16 @@ form {
 		max-width: 500px;
 	}
 	
-	[name=my-amount]{
-		max-width: 100px;
-	}	
+	
 	
 	[name=my-deliver]{
 		max-width: 100px;
 	}	
 		
-	
+	[name=my-time]{
+		max-width: 150px;
+	}	
+			
 	
 	
 	input[type=checkbox] {
@@ -98,6 +99,7 @@ form {
 		width: 20px;
 		xxopacity:0;
 	}
+
 	
 	textarea{
 		resize: none;

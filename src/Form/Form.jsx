@@ -1,11 +1,17 @@
 import React from 'react';
 
+
+import Input from './Inputs/Input.jsx';
 import Text from './Inputs/Text.jsx';
 import Number from './Inputs/Number.jsx';
 import Phone from './Inputs/Phone.jsx';
 import Checkbox from './Inputs/Checkbox.jsx';
+import Select from './Inputs/Select.jsx';
 
-import Validation from './Inputs/Validation.js';
+import Validation from './Tools/Validation.js';
+
+
+
 
 import './style.scss';
 import './validation.scss';
@@ -35,17 +41,12 @@ class Form extends React.Component {
 			var obj = {};
 			
 			this.props.fields.map( f =>{
-				
 				if(!f.header) {
-					if(!f.showIf || this.state.object[f.showIf.name] == f.showIf.value)
-					   obj[f.name] = this.state.object[f.name];
+					if(this.showRow(f))  obj[f.name] = this.state.object[f.name];
 				}
-				
 			})
 			
-			this.props.onSuccess(obj, ()=>{
-				this.setState({submitted:false});
-			})	
+			this.props.onSuccess(obj, ()=>{ this.setState({submitted:false})	})	
 		}
 	}
 
@@ -57,13 +58,15 @@ class Form extends React.Component {
 		this.setState( {object, errors, submitted} )
 	}
 	
-	Input = function(attrs){
+	Element = function(attrs){
+		
 		switch(attrs.tag){
-			case "phone":  return <Phone  {...attrs} />
-			case "number": return <Number {...attrs} />
-			case "text":   return <Text   {...attrs} />
-			case "checkbox":  return <Checkbox {...attrs} />
-			default:       return <div>{attrs.value}</div>
+			case "text":     return <Input {...attrs} strategy={Text} />
+			case "phone":    return <Input {...attrs} strategy={Phone} />
+			case "number":   return  <Input {...attrs} strategy={Number} />
+			case "select":   return <Input {...attrs} strategy={Select} />
+			case "checkbox": return <Input {...attrs} strategy={Checkbox} />
+			default:         return <div>{attrs.value}</div>
 		}					
 	}	
 
@@ -75,7 +78,6 @@ class Form extends React.Component {
 	}
 	
 	renderHeader = i =>{
-		
 		return (
 			<tr  key={ i.header || '' + Math.random()}>
 				<td colSpan="2">
@@ -85,19 +87,35 @@ class Form extends React.Component {
 		)
 	}
 
+	showRow = i =>{
+		
+		var show = false
+
+		if(!i.showIf) return true;
+		else {
+			var value = this.state.object[i.showIf.name]
+			
+			if(i.showIf.value!==undefined && i.showIf.value==value) return  true;
+			else if( i.showIf.func!==undefined && i.showIf.func(value) ) return true;
+		}
+		
+		return show;
+	}
+
 	
 	renderInput = i =>{
-		var Input = this.Input;
+		var Element = this.Element;
 		
-		var show = (i.showIf == null || this.state.object[i.showIf.name] == i.showIf.value);
+
 		
+
 		return (
 				<tr  key={ i.name} >
-					{ show && 
+					{ this.showRow(i) && 
 					<>
-						<td><label className={'control-label ' + (i.required ? 'required':'')}>	{i.label}</label></td>
+						<td><label className={'control-label ' + (i.required ? 'required':'')}>{i.label}</label></td>
 						<td>
-							<Input {...i} value={this.state.object[i.name]} error={this.state.errors[i.name] } submitted={this.state.submitted} change={this.change}  />
+							<Element {...i} value={this.state.object[i.name]} error={this.state.errors[i.name] } submitted={this.state.submitted} change={this.change}  />
 						</td>
 					</>
 					}

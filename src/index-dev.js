@@ -8,24 +8,30 @@ import 'bootstrap/dist/js/bootstrap.js';
 
 
 
-const newOrder = { id:"1", fName:"", lName:"", address:'', phone:"", amount:"", deliver: false, time:''}
+const newOrder = { id:"1", fName:"", lName:"", address:'', phone:"", quantity:"", deliver: false, time:'1'}
 
 const fields1 = [
 	{label:"ID", 		 name:"id",    tag:"label"},
 	{label:"First Name", name:"fName", tag:"text",  required:true},
 	{label:"Last Name",  name:"lName", tag:"text",  required:true},
-	{label:"Phone",      name:"phone", tag:"phone", required:true}
+	{label:"Phone",      name:"phone", tag:"phone"},
+	{label:"Deliver",    name:"deliver", tag:"checkbox"},
+
 ]
 
 
 
-const fields3 =  [ 
+const fields2 =  [ 
 
 		{label:"Order Info",  tag:"header"  },
-		{label:"Amount",     name:"amount", tag:"number"},
-		{label:"Deliver",    name:"deliver", tag:"checkbox"},
-		{label:"Address",    name:"address", tag:"text", showIf: {name: "deliver", value:true}, required:true,},
-		{label:"Time",       name:"time",    tag:"text", showIf: {name: "deliver", value:true}},
+		{label:"Quantity",   name:"quantity",  tag:"number", required:true},
+		{label:"Deliver",    name:"deliver", tag:"checkbox", showIf: {name: "quantity", func:v =>v>5 }},
+		{label:"Address",    name:"address", tag:"text", required:true, showIf: {name: "deliver", value:true} },
+		{label:"Time",       name:"time",    tag:"select", showIf: {name: "deliver", value:true}, options: [  
+			{id:"1", label:"10:30 AM"},
+			{id:"2", label:"11:00 AM"},
+			{id:"3", label:"11:30 AM"}
+		]}
 	]	
 	
 	
@@ -33,7 +39,7 @@ class Main extends React.Component {
 	
     state = {
 		object1: {...newOrder}, fields1:[...fields1], 
-		object3: {...newOrder}, fields3:[...fields3] 		
+		object2: {...newOrder}, fields2:[...fields2] 		
 	}	
 
 	onSuccess = (data, callback)=>{
@@ -60,7 +66,7 @@ class Main extends React.Component {
 			<div className="container">
 				
 				<div className="row">
-				
+
 					<div className="col-xs-12 col-md-6">
 						<div style={{background: 'white', borderRadius:'5px', padding: '10px', margin:'10px'}}>
 							<h4>Test 1</h4>
@@ -72,22 +78,18 @@ class Main extends React.Component {
 						</div>
 					</div>
 					
-
 					<div className="col-xs-12 col-md-6">				
 						<div style={{background: 'white', borderRadius:'5px', padding: '10px', margin:'10px'}}>
-							<h4>Test 3</h4>
-							<Form object={this.state.object3} onSuccess={this.onSuccess}   fields={this.state.fields3}>
+							<h4>Test 2</h4>
+							<Form object={this.state.object2} onSuccess={this.onSuccess}   fields={this.state.fields2}>
 								<button className="btn btn-primary" type="submit" >Submit</button> 
 							</Form>
 						</div>				
-					</div>	
-
+					</div>		
 				</div>
 			</div>
 			
-			
-			
-			
+	
 		)
 	}
 }

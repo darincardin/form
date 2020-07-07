@@ -1,19 +1,19 @@
 import React from 'react';
-import Text from './Text.jsx';
+import Validation from '../Tools/Validation.js';
 
+var Phone =   {
 
+	getEvent: e =>[e.target.name, e.target.value],
 
-import Validation from './Validation.js';
+	validate: (required, value) =>{
+		if(required && Validation.required(value) )  return 'required';			
+		return  Validation.phone(value) ? 'phone'  : '';
+	},
 
-var pattern = /^\d{3}-\d{3}-\d{4}$/;
-
-var Phone = props=>{
-	
-	var validate = value =>{  
-		return Validation.phone(value)
+	html: (attribs, tooltip) =>{
+		return <input className="form-control" {...attribs}  {...tooltip} type="text" /> 	
 	}
-	
-	return ( <Text type="text" {...props} validation={validate}  /> ) 	
 }
+
 export default Phone;
 

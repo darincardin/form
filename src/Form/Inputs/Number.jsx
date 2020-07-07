@@ -1,11 +1,24 @@
 import React from 'react';
-import Text from './Text.jsx';
+import Validation from '../Tools/Validation.js';
+
+var pattern = /^\d{3}-\d{3}-\d{4}$/;
 
 
+var Number =   {
 
-var Number = props=>{
-	 return ( <Text type="number" min="1" {...props}  /> ) 	
+	getEvent: e =>[e.target.name, e.target.value],
+
+	validate: (required, value) =>{
+		return (required && Validation.required(value)) ? 'required' : '';	
+	},
+
+	html: (attribs, tooltip) =>{
+		return <input className="form-control" {...attribs}  {...tooltip} type="number" min="1"	 /> 	
+	}
 }
 
 export default Number;
+
+
+
 

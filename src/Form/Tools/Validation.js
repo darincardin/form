@@ -5,20 +5,15 @@ var Validation = (function()  {
 	
 	var pattern_phone = /^\d{3}-\d{3}-\d{4}$/;	
 	
-	var required = value =>{
-		return (!value) ? 'required' : '' ;
-	}	
+	var required = value =>{ return (!value) }	
 	
-	var phone = value =>{  
-		return (value && !pattern_phone.test(value) ) ? 'phone' : '' ;
-	}
+	var phone = value =>{  	return (value && !pattern_phone.test(value) ) }
 
 	var getErrors = ( fields, obj ) => {
 		
 		var errors = {};
 		
 		fields.map( f =>{	
-			
 			errors[f.name] = getError(f, obj);
 		});
 
@@ -27,9 +22,10 @@ var Validation = (function()  {
 
 	var getError = (i, obj) =>{
 		
-		if(i.required) return  required(obj[i.name]);
-
-		if(i.tag == 'phone') return  phone(obj[i.name]);		
+		
+		if(i.required && required(obj[i.name]) )  return 'required';			
+		return ( i.tag == 'phone' && phone(obj[i.name]) ) ?  'phone'  : '';
+	
 		
 	}
 
@@ -52,7 +48,7 @@ var Validation = (function()  {
 				else errors[f.name] = getError(f, obj);	
 		});
 		
-		
+	
 		return Object.keys(errors).every( v => (
 			!errors[v]
 		))	
