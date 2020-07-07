@@ -120,12 +120,25 @@ form {
 	.header {
 		position:relative;
 		text-align:center;
-		border-bottom: solid #878787 1px;
+		
+		
+		xxborder-bottom: solid #878787 1px;
+		
+		hr {
+			background: black;
+			display: inline-block;
+			width: calc(50% - 55px);
+			margin: 0;
+			border-bottom: solid black 1px;
+		}
+		
+		
 		span {
-			position:relative;
-			background: #ffffff;
-			bottom: -10px;
-			padding: 0px 4px;			
+			position: relative;
+			bottom: -4px;
+			width: 110px;
+			padding: 0px 4px;
+			display: inline-block;	
 		}
 	}
 	

@@ -24,6 +24,7 @@ const fields1 = [
 const fields2 =  [ 
 
 		{label:"Order Info",  tag:"header"  },
+		/*
 		{label:"Quantity",   name:"quantity",  tag:"number", required:true},
 		{label:"Deliver",    name:"deliver", tag:"checkbox", showIf: {name: "quantity", func:v =>v>5 }},
 		{label:"Address",    name:"address", tag:"text", required:true, showIf: {name: "deliver", value:true} },
@@ -32,6 +33,7 @@ const fields2 =  [
 			{id:"2", label:"11:00 AM"},
 			{id:"3", label:"11:30 AM"}
 		]}
+		*/
 	]	
 	
 	

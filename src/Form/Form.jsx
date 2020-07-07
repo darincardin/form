@@ -81,7 +81,10 @@ class Form extends React.Component {
 		return (
 			<tr  key={ i.header || '' + Math.random()}>
 				<td colSpan="2">
-					<div className="header"><span>{i.header}</span> </div>
+					<div className="header">
+					
+					
+					<hr /><span>{i.header}</span><hr /> </div>
 				</td>
 			</tr>
 		)
