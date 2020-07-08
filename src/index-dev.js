@@ -8,7 +8,7 @@ import 'bootstrap/dist/js/bootstrap.js';
 
 
 
-const newOrder = { id:"1", fName:"", lName:"", address:'', phone:"", quantity:"", deliver: false, time:'1'}
+const newOrder = { id:"1", fName:"", lName:"", address:'', phone:"", quantity:"", deliver: true, time:'1'}
 
 const fields1 = [
 	{label:"ID", 		 name:"id",    tag:"label"},
@@ -24,7 +24,7 @@ const fields1 = [
 const fields2 =  [ 
 
 		{label:"Order Info",  tag:"header"  },
-		/*
+		
 		{label:"Quantity",   name:"quantity",  tag:"number", required:true},
 		{label:"Deliver",    name:"deliver", tag:"checkbox", showIf: {name: "quantity", func:v =>v>5 }},
 		{label:"Address",    name:"address", tag:"text", required:true, showIf: {name: "deliver", value:true} },
@@ -33,7 +33,7 @@ const fields2 =  [
 			{id:"2", label:"11:00 AM"},
 			{id:"3", label:"11:30 AM"}
 		]}
-		*/
+		
 	]	
 	
 	
@@ -69,7 +69,7 @@ class Main extends React.Component {
 				
 				<div className="row">
 
-					<div className="col-xs-12 col-md-6">
+					<div className="col-xs-12 col-sm-6">
 						<div style={{background: 'white', borderRadius:'5px', padding: '10px', margin:'10px'}}>
 							<h4>Test 1</h4>
 							<Form object={this.state.object1} onSuccess={this.onSuccess}   fields={this.state.fields1}>
@@ -80,7 +80,7 @@ class Main extends React.Component {
 						</div>
 					</div>
 					
-					<div className="col-xs-12 col-md-6">				
+					<div className="col-xs-12 col-sm-6">				
 						<div style={{background: 'white', borderRadius:'5px', padding: '10px', margin:'10px'}}>
 							<h4>Test 2</h4>
 							<Form object={this.state.object2} onSuccess={this.onSuccess}   fields={this.state.fields2}>
