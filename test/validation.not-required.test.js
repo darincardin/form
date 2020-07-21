@@ -41,6 +41,9 @@ describe('Validation', () => {
     test('not-required', () => {
 
 
+		expect(wrapper.find('.has-success').length).toBe(0);
+		expect(wrapper.find('.has-error').length).toBe(0);
+
 		wrapper.find('#submit').simulate('submit');
 
 		expect(wrapper.find('.has-success').length).toBe(2);

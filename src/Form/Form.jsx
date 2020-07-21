@@ -14,7 +14,7 @@ class Form extends React.Component {
 
 	state =  { 
 	    object:  this.props.object,
-		submitted: true,
+		submitted: false,
 		errors:{},
 		show: {}
 	}
