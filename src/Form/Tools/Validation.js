@@ -9,60 +9,33 @@ var Validation = (function()  {
 	
 	var phone = value =>{  	return (value && !pattern_phone.test(value) ) }
 
-	var getErrors = ( fields, obj ) => {
+
+	var validate = refList =>{
 		
 		var errors = {};
-		
-		fields.map( f =>{	
-			errors[f.name] = getError(f, obj);
-		});
 
-		return errors;	
+		Object.keys(refList).map(i =>{
+			errors[i] = refList[i].current.validate();	
+		})		
+		
+		return errors;
 	}
 
-	var getError = (i, obj) =>{
+	var getData = (fields, state) =>{
 		
-		
-		if(i.required && required(obj[i.name]) )  return 'required';			
-		return ( i.tag == 'phone' && phone(obj[i.name]) ) ?  'phone'  : '';
-	
-		
-	}
-
-
-
-	var isValid = ( fields, obj )=>{
-		
-
-		var errors = {};
-		
-		fields.map( f =>{	
+		var obj = {...state.object};
 			
-				if(f.showIf) {
-					let {name, value} = f.showIf;
-					
-					if( obj[name] == value) errors[f.name] = getError(f, obj);
-					
-					
-				}
-				else errors[f.name] = getError(f, obj);	
-		});
+		fields.map( f =>{
+			if(!state.show[f.name]) obj[f.name] = undefined;
+		})	
 		
-	
-		return Object.keys(errors).every( v => (
-			!errors[v]
-		))	
-
+		return obj;
 	}
-
-
-
-
 
 
     return {
-		getErrors: getErrors,
-		isValid: isValid,
+		validate: validate,
+		getData: getData,
 		required: required,
 		phone:phone
     }

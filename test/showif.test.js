@@ -16,10 +16,10 @@ var getEvent1 = (n,v)=> { return { target: {name:n, value:v} }}
 var getEvent2 = (n,v)=> { return { target: {name:n, checked:v} }}
 
 const fields = [ 
-	{label:"Order Info",  tag:"header"  },
-	{label:"First Name", name:"fName",  tag:"text"},
-	{label:"Deliver",    name:"deliver", tag:"checkbox"},
-	{label:"Address",    name:"address", tag:"text", showIf: {name: "deliver", value:true}}
+	{label:"Order Info", name:"orderInfo", 	tag:"header"  },
+	{label:"First Name", name:"fName",  	tag:"text"},
+	{label:"Deliver",    name:"deliver", 	tag:"checkbox", showIf: {target: "address", test:true}},
+	{label:"Address",    name:"address", 	tag:"text"}
 ]			
 
 var wrapper;
@@ -38,12 +38,12 @@ describe('Validation', () => {
 
     test('showIf-1', () => {
 
-		expect(wrapper.find('input[name="address"]').exists()).toBeFalsy();
+		expect(wrapper.find('input[name="address"]').parents('tr').hasClass('hide')).toBe(true);
 		
 		wrapper.find('input[name="deliver"]').simulate('change', getEvent2('deliver',true));
 
 	
-		expect(wrapper.find('input[name="address"]').exists()).toBeTruthy();
+		expect(wrapper.find('input[name="address"]').parents('tr').hasClass('hide')).toBe(false);
 		wrapper.find('input[name="address"]').simulate('change', getEvent1('address',"Main_Street"));
 	
 		
@@ -56,12 +56,14 @@ describe('Validation', () => {
 
     test('showIf-2', () => {
 
-		expect(wrapper.find('input[name="address"]').exists()).toBeFalsy();
+		expect(wrapper.find('input[name="address"]').parents('tr').hasClass('hide')).toBe(true);
 		
 		wrapper.find('input[name="deliver"]').simulate('change', getEvent2('deliver',true));
 
 	
-		expect(wrapper.find('input[name="address"]').exists()).toBeTruthy();
+		expect(wrapper.find('input[name="address"]').parents('tr').hasClass('hide')).toBe(false);
+		
+		
 		wrapper.find('input[name="address"]').simulate('change', getEvent1('address',"Main_Street"));
 	    wrapper.find('input[name="deliver"]').simulate('change', getEvent2('deliver',false));
 		

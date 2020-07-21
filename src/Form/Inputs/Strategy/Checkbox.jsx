@@ -12,9 +12,13 @@ var Checkbox =   {
 
 	html: attribs =>{
 			
-		delete attribs.value;
+		//delete attribs.value;
 
-		return <input {...attribs}  className="form-group" type="checkbox" checked={attribs.value}  autoComplete="off" /> 		
+		return <>
+			
+			<input {...attribs}  className="form-group" type="checkbox" checked={attribs.value}  autoComplete="off" /> 		
+		
+		</>
 	}
 }
 

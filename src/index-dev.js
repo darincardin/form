@@ -8,9 +8,9 @@ import 'bootstrap/dist/js/bootstrap.js';
 
 
 
-const newOrder = { id:"1", fName:"", lName:"", address:'', phone:"", quantity:"", deliver: true, time:'1'}
+const newOrder = { id:"1", fName:"", lName:"", address:'', phone:"", quantity:"", deliver: false, time:'1'}
 
-const fields1 = [
+const fields1ddddd = [
 	{label:"ID", 		 name:"id",    tag:"label"},
 	{label:"First Name", name:"fName", tag:"text",  required:true},
 	{label:"Last Name",  name:"lName", tag:"text",  required:true},
@@ -19,16 +19,21 @@ const fields1 = [
 
 ]
 
+const fields1 = [ 
+	{label:"Order Info", name:"orderInfo", 	tag:"header"  },
+	{label:"First Name", name:"fName",  	tag:"text"},
+	{label:"Deliver",    name:"deliver", 	tag:"checkbox", showIf: {target: "address", test:true}},
+	{label:"Address",    name:"address", 	tag:"text"}
+]			
 
 
 const fields2 =  [ 
 
-		{label:"Order Info",  tag:"header"  },
-		
-		{label:"Quantity",   name:"quantity",  tag:"number", required:true},
-		{label:"Deliver",    name:"deliver", tag:"checkbox", showIf: {name: "quantity", func:v =>v>5 }},
-		{label:"Address",    name:"address", tag:"text", required:true, showIf: {name: "deliver", value:true} },
-		{label:"Time",       name:"time",    tag:"select", showIf: {name: "deliver", value:true}, options: [  
+		{label:"Order Info",  tag:"header", name: "orderInfo"  },
+		{label:"Quantity",   name:"quantity",  tag:"number",required:true,  showIf: {target: "deliver", test:v =>v>5 }},
+		{label:"Deliver",    name:"deliver", tag:"checkbox",  showIf: {target: ["address", 'time'], test:true }},
+		{label:"Address",    name:"address", tag:"text", required:true },
+		{label:"Time",       name:"time",    tag:"select"  , options: [  
 			{id:"1", label:"10:30 AM"},
 			{id:"2", label:"11:00 AM"},
 			{id:"3", label:"11:30 AM"}
@@ -99,10 +104,3 @@ class Main extends React.Component {
 
 ReactDOM.render( <Main />, document.getElementById('app'));
 
-
-/*
-
-
-
-					
-*/

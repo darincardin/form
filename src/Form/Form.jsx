@@ -1,16 +1,10 @@
 import React from 'react';
 
 
-import Input from './Inputs/Input.jsx';
-import Text from './Inputs/Text.jsx';
-import Number from './Inputs/Number.jsx';
-import Phone from './Inputs/Phone.jsx';
-import Checkbox from './Inputs/Checkbox.jsx';
-import Select from './Inputs/Select.jsx';
+
+import InputFactory from './Inputs/InputFactory.jsx'
 
 import Validation from './Tools/Validation.js';
-
-
 
 
 import './style.scss';
@@ -20,122 +14,111 @@ class Form extends React.Component {
 
 	state =  { 
 	    object:  this.props.object,
-		submitted: false,
-		errors:{}	
+		submitted: true,
+		errors:{},
+		show: {}
 	}
+	
+	refList = {}
 	
 	constructor(props) {
 		super(props)		
-		this.state.errors = this.getErrors()
+		this.init();
 	}
 	
-	getErrors(){
-		return Validation.getErrors(this.props.fields, this.state.object);	
-	}	
+	componentDidMount() {
+		this.validate();
+		this.showIf();
+	}
+	
+	validate =()=>{
+		this.setState({errors: Validation.validate(this.refList)})
+	}
+	
+	init(){
+		
+		this.props.fields.map( field=>{
+			
+				this.refList[field.name] =  React.createRef();
+			
+				if(field.showIf) {
+					var {target, test} = field.showIf;	
+					
+					if(typeof test != 'function' ) field.showIf.test = (v) => v==test ;	
+					if(typeof target == 'string')  field.showIf.target = [target] ;		
+
+					if(this.state.show[field.name]===undefined)  this.state.show[field.name] = true;
+				}	
+				else  this.state.show[field.name] = true;	
+		}) 	
+	}
 	
 	onSubmit = (e)=> {
-		e.preventDefault()
-		this.setState({submitted:true});
-		
-		if(Validation.isValid(this.props.fields, this.state.object)){
-			var obj = {};
+
+			e.preventDefault()
+			this.setState({submitted:true});	
 			
-			this.props.fields.map( f =>{
-				if(!f.header) {
-					if(this.showRow(f))  obj[f.name] = this.state.object[f.name];
-				}
+			var valid = this.props.fields.every( f =>{
+				var visible = this.state.show[f.name];
+				return visible ? this.state.errors[f.name] == '' : true;	
 			})
-			
-			this.props.onSuccess(obj, ()=>{ this.setState({submitted:false})	})	
-		}
+						
+			if(valid) {
+				var data = Validation.getData(this.props.fields, this.state);	
+				this.props.onSuccess(data, ()=>{ this.setState({submitted:false})	})	
+			}
 	}
 
-	change = obj =>{	
-		var object =  {...this.state.object, ...obj.object}
-		var errors =  {...this.state.errors, ...obj.errors}	
+	showIf = () =>{
+		
+		this.props.fields.map(field =>{
+			
+			var value = this.state.object[field.name]
+			var show =  this.state.show[field.name]
+	
+			if(field.showIf) {
+				let {test, target} = field.showIf;
+				
+				target.map(t =>{
+					this.state.show[t] = show ? test(value): false;
+				})				
+			}
+		})
+	}
+
+
+	change = (name, value, errors) =>{	
+	
+		this.state.object[name] = value; 
+		
+		this.showIf();	
+
+		var object =  {...this.state.object, [name]:value }
+		var errors =  {...this.state.errors, [name]:errors }	
 		var submitted = this.state.submitted;
 
 		this.setState( {object, errors, submitted} )
 	}
-	
-	Element = function(attrs){
-		
-		switch(attrs.tag){
-			case "text":     return <Input {...attrs} strategy={Text} />
-			case "phone":    return <Input {...attrs} strategy={Phone} />
-			case "number":   return  <Input {...attrs} strategy={Number} />
-			case "select":   return <Input {...attrs} strategy={Select} />
-			case "checkbox": return <Input {...attrs} strategy={Checkbox} />
-			default:         return <div>{attrs.value}</div>
-		}					
-	}	
 
 	componentWillReceiveProps(props) {
 		this.setState({object: props.object }, ()=>{
-			var errors = this.getErrors();
-			this.setState( {errors:errors, submitted:false} );
+			this.validate();
+			this.setState( {submitted:false} );
 		}) 
 	}
-	
-	renderHeader = i =>{
+
+	renderField = i =>{
+		  
+		var Row =  InputFactory.create;
+
 		return (
-			<tr  key={ i.header || '' + Math.random()}>
-				<td colSpan="2">
-					<div className="header">
-					
-					
-					<hr /><span>{i.header}</span><hr /> </div>
-				</td>
+			<tr  key={i.name} className={this.state.show[i.name]?'':'hide'}>
+				<Row {...i} ref={this.refList[i.name]}  value={this.state.object[i.name]} error={this.state.errors[i.name] } submitted={this.state.submitted} change={this.change}  />
 			</tr>
 		)
-	}
-
-	showRow = i =>{
-		
-		var show = false
-
-		if(!i.showIf) return true;
-		else {
-			var value = this.state.object[i.showIf.name]
-			
-			if(i.showIf.value!==undefined && i.showIf.value==value) return  true;
-			else if( i.showIf.func!==undefined && i.showIf.func(value) ) return true;
-		}
-		
-		return show;
-	}
-
-	
-	renderInput = i =>{
-		var Element = this.Element;
-		
-
-		
-
-		return (
-				<tr  key={ i.name} >
-					{ this.showRow(i) && 
-					<>
-						<td><label className={'control-label ' + (i.required ? 'required':'')}>{i.label}</label></td>
-						<td>
-							<Element {...i} value={this.state.object[i.name]} error={this.state.errors[i.name] } submitted={this.state.submitted} change={this.change}  />
-						</td>
-					</>
-					}
-				</tr>
-		)
 	}	
-
-	renderData = fields => {
-		
-		return fields.map( field =>{
-
-			if(field.tag == 'header') return this.renderHeader({header:field.label})
-
-			else return this.renderInput(field) 
-		})	
-	}
 	
+
 	
 	render() {
 
@@ -143,7 +126,9 @@ class Form extends React.Component {
 			<form onSubmit={this.onSubmit}>
 				<table>
 					<tbody>
-						{this.props.fields && this.renderData(this.props.fields) }
+						{   this.props.fields && 
+							this.props.fields.map( field =>this.renderField(field) )	
+						}
 					</tbody>
 				</table>
 				<div className="text-right">{this.props.children}</div>

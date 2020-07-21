@@ -12,7 +12,7 @@ console.warn = ()=>{}
 
 
 const fields = [ 
-	{label:"Order Info",  tag:"header"  },
+	{label:"Order Info", name:"info",   tag:"header"  },
 	{label:"First Name", name:"fName",  tag:"text",   required:true},
 	{label:"Phone",      name:"phone",  tag:"phone",  required:true},	
 ]			

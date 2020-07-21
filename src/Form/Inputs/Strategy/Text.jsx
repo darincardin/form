@@ -1,5 +1,5 @@
 import React from 'react';
-import Validation  from '../Tools/Validation.js';
+import Validation from '../../Tools/Validation.js';
 
 var Text =   {
 

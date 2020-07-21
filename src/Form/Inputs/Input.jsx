@@ -12,9 +12,13 @@ class Input extends React.Component {
 		this.state = {value: this.props.value}
 	}
 	
+	validate(value = this.state.value){
+		return this.props.strategy.validate(this.props.required, value )
+	}
+	
 	componentDidMount() {
 	    this.ttip = tooltip(this.elem.current);
-		this.tooltipParams = { onKeyUp:this.onWatch, onFocus: this.onWatch	}
+		this.tooltipParams = { onKeyUp:this.onWatch, onFocus:this.onWatch	}
 	}
 	
 	componentWillReceiveProps(props) {
@@ -27,10 +31,7 @@ class Input extends React.Component {
 		
 		this.setState({value:value})
 
-		this.props.change({
-			object: { [name]: value},
-			errors: { [name]: this.props.strategy.validate(this.props.required, value) }
-		})			
+		this.props.change(name, value, this.validate(value))
 	}
 
 	onWatch = () =>{
@@ -52,13 +53,17 @@ class Input extends React.Component {
 		}	
 
 		return (
-			<div ref={this.elem} className={className.join(" ")} name={`my-${this.props.name}`}  >	
-			
-				{ this.props.strategy.html(attribs, this.tooltipParams, this.props.options) }
-				
-				<span className="glyphicon glyphicon-ok form-control-feedback" ></span>
-				<span className="glyphicon glyphicon-remove form-control-feedback" ></span>
-			</div>
+			<>
+				<td><label className={'control-label ' + (this.props.required ? 'required':'')}>{this.props.label}</label></td>
+				<td>
+					<div ref={this.elem} className={className.join(" ")} name={`my-${this.props.name}`}  >							
+						{ this.props.strategy.html(attribs, this.tooltipParams, this.props.options) }
+						<span className="glyphicon glyphicon-ok form-control-feedback" ></span>
+						<span className="glyphicon glyphicon-remove form-control-feedback" ></span>
+					</div>						
+				</td>
+			</>
+
 		)
 	}
 }			

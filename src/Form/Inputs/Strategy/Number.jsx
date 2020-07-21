@@ -1,6 +1,5 @@
 import React from 'react';
-import Validation from '../Tools/Validation.js';
-
+import Validation from '../../Tools/Validation.js';
 var pattern = /^\d{3}-\d{3}-\d{4}$/;
 
 

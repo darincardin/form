@@ -23,11 +23,11 @@ var getEvent = (n,v)=> { return { target: {name:n, value:v} }}
 const newOrder = { id:"", fName:"", lName:"", phone:"",  amount:"" }
 	
 const fields = [ 
-	{label:"Personal Data", tag:"header"},
-	{label:"First Name", name:"fName",  tag:"text",   required:true},
-	{label:"Last Name",  name:"lName",  tag:"text",   required:true},
-	{label:"Phone",      name:"phone",  tag:"phone"},
-	{label:"Amount",     name:"amount", tag:"number"}
+	{label:"Personal Data", name:"personal", tag:"header"},
+	{label:"First Name", 	name:"fName",  tag:"text",   required:true},
+	{label:"Last Name",  	name:"lName",  tag:"text",   required:true},
+	{label:"Phone",     	name:"phone",  tag:"phone"},
+	{label:"Amount",     	name:"amount", tag:"number"}
 ]	
 		
 var	onSuccess = data=>{	result = data; }	
