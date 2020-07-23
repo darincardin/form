@@ -6,41 +6,32 @@ import Form from "./Form/Form.jsx";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 
-
-
-const newOrder = { id:"1", fName:"", lName:"", address:'', phone:"", quantity:"", deliver: false, time:'1'}
-
-const fields1ddddd = [
-	{label:"ID", 		 name:"id",    tag:"label"},
-	{label:"First Name", name:"fName", tag:"text",  required:true},
-	{label:"Last Name",  name:"lName", tag:"text",  required:true},
-	{label:"Phone",      name:"phone", tag:"phone"},
-	{label:"Deliver",    name:"deliver", tag:"checkbox"},
-
-]
+const newOrder = { id:"1", fName:"", lName:"", address:'', phone:"", mayo:false, quantity:"", info:'', deliver: false, time:'1'}
 
 const fields1 = [ 
 	{label:"Order Info", name:"orderInfo", 	tag:"header"  },
 	{label:"First Name", name:"fName",  	tag:"text"},
-	{label:"Deliver",    name:"deliver", 	tag:"checkbox", showIf: {target: "address", test:true}},
-	{label:"Address",    name:"address", 	tag:"text"}
+	{label:"Address",    name:"address", 	tag:"text"},
+	{label:"Info",    	 name:"info", 	tag:"textarea"}
 ]			
 
 
 const fields2 =  [ 
 
 		{label:"Order Info",  tag:"header", name: "orderInfo"  },
-		{label:"Quantity",   name:"quantity",  tag:"number",required:true,  showIf: {target: "deliver", test:v =>v>5 }},
-		{label:"Deliver",    name:"deliver", tag:"checkbox",  showIf: {target: ["address", 'time'], test:true }},
+		{label:"Mayonase",    name:"mayo", tag:"checkbox" },
+		{label:"Quantity",   name:"quantity",  tag:"number", required:true,  showIf: {target: ['deliver'], test:v =>v>5 }},
+		{label:"Deliver",    name:"deliver",   tag:"radio",  showIf:{target: ['address', 'time'], test:true }, options: [
+			{value:false, label:"Pickup"},
+			{value:true,  label:"Deliver"}
+		]},
 		{label:"Address",    name:"address", tag:"text", required:true },
 		{label:"Time",       name:"time",    tag:"select"  , options: [  
 			{id:"1", label:"10:30 AM"},
 			{id:"2", label:"11:00 AM"},
 			{id:"3", label:"11:30 AM"}
 		]}
-		
-	]	
-	
+]	
 	
 class Main extends React.Component {
 	
@@ -71,7 +62,6 @@ class Main extends React.Component {
 	render = ()=>{
 		return (
 			<div className="container">
-				
 				<div className="row">
 
 					<div className="col-xs-12 col-sm-6">
@@ -95,8 +85,6 @@ class Main extends React.Component {
 					</div>		
 				</div>
 			</div>
-			
-	
 		)
 	}
 }

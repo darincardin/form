@@ -30,7 +30,7 @@ class Input extends React.Component {
 		var [name, value] = this.props.strategy.getEvent(e)
 		
 		this.setState({value:value})
-
+		
 		this.props.change(name, value, this.validate(value))
 	}
 
@@ -44,14 +44,14 @@ class Input extends React.Component {
 		var className = ["form-group has-feedback"];
 		
 		if(this.props.submitted) className.push( !this.props.error ? "has-success" :"has-error" );		
-		
+
 		var attribs = {
-			type: this.props.type || "text",
+			type: this.props.tag || "text",
 			name: this.props.name,
 			onChange: this.onChange,
 			value: this.state.value
 		}	
-
+	
 		return (
 			<>
 				<td><label className={'control-label ' + (this.props.required ? 'required':'')}>{this.props.label}</label></td>

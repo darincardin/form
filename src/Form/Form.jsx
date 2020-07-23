@@ -1,11 +1,7 @@
 import React from 'react';
 
-
-
 import InputFactory from './Inputs/InputFactory.jsx'
-
 import Validation from './Tools/Validation.js';
-
 
 import './style.scss';
 import './validation.scss';
@@ -86,7 +82,6 @@ class Form extends React.Component {
 		})
 	}
 
-
 	change = (name, value, errors) =>{	
 	
 		this.state.object[name] = value; 
@@ -112,13 +107,11 @@ class Form extends React.Component {
 		var Row =  InputFactory.create;
 
 		return (
-			<tr  key={i.name} className={this.state.show[i.name]?'':'hide'}>
+			<tr  key={i.name} type={i.tag} className={this.state.show[i.name]?'':'hide'}>
 				<Row {...i} ref={this.refList[i.name]}  value={this.state.object[i.name]} error={this.state.errors[i.name] } submitted={this.state.submitted} change={this.change}  />
 			</tr>
 		)
 	}	
-	
-
 	
 	render() {
 

@@ -7,18 +7,11 @@ var Checkbox =   {
 	getEvent: e =>[e.target.name, e.target.checked],
 
 	validate: (required, value) =>{
-		return ''
+		return (required && Validation.required(value)) ? 'required' : '';	
 	},
 
 	html: attribs =>{
-			
-		//delete attribs.value;
-
-		return <>
-			
-			<input {...attribs}  className="form-group" type="checkbox" checked={attribs.value}  autoComplete="off" /> 		
-		
-		</>
+		return <input {...attribs}  className="form-group" type="checkbox" checked={attribs.value}  autoComplete="off" /> 		
 	}
 }
 

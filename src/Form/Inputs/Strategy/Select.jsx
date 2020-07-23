@@ -11,7 +11,6 @@ var Select =   {
 	},
 
 	html: (attribs, tooltip, options) =>{
-					
 
 		return 	(
 			<select {...attribs}  className="form-control"  >

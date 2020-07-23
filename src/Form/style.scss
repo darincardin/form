@@ -7,9 +7,15 @@ form {
 		tr {
 			height: 0;
 			transition: height 2s;
-			td { padding-bottom: 10px;	}
+			td { 
+			
+				padding-bottom: 10px;
+
+			}
+
 			td:first-child{	
 				width: 100px;
+				
 				@media screen and  (max-width : 540px) {
 					& {
 						width: 10px;
@@ -17,134 +23,151 @@ form {
 						text-align:left;
 					}
 				}    
+			}
 
-			}
-		}	
-    }
 			
+		}
 			
-			
-			
-	
-			
-	.control-label {
-	    text-align: right;
-        width: 100%;
-        padding-top: 0px!important;
-	    margin-bottom: 0px!important;
-		padding-top: 0!important;
-		padding-right: 20px;
-	
-	
-		@media screen and  (max-width : 540px) {
-			& {
-				padding-right: 15px; 
-			}
-		}    		
-						
-		
-		&.required:after {
-			content: "*";
-			display: inline;
-			color: red;
-			position: absolute;
-			margin-left: 5px;
+		tr[type=textarea] td{
+			vertical-align: top;
+			padding-top: 10px;
 		}		
-	}
-		
 			
-
-	
-	.form-group {
-		margin-bottom: 0!important;
-		width:100%;
-	}
-		
-
-		
-	[name=my-fName]{
-		max-width: 300px;
-	}
-	
-	[name=my-lName]{
-		max-width: 300px;
-	}
-	
-	[name=my-quantity], [name=my-amount]{
-		max-width: 100px;
-	}
-	
-	[name=my-phone]{
-		max-width: 200px;
-	}
-	
-	[name=my-address]{
-		max-width: 500px;
-	}
-	
-	
-	
-	[name=my-deliver]{
-		max-width: 100px;
-	}	
-		
-	[name=my-time]{
-		max-width: 150px;
-	}	
 			
 	
-	
-	input[type=checkbox] {
-		height: 20px;
-		width: 20px;
-		xxopacity:0;
-	}
-
-	
-	textarea{
-		resize: none;
-        height: 70px!important;
-		text-overflow: ellipsis;
-		resize: none;
-	}	
-
-
-
-
-	.popover{
-		font-weight: 700;
-		white-space:nowrap;
-	}	
-	
-	
-	.header {
-		position:relative;
-		text-align:center;
+				
+		.control-label {
+			text-align: right;
+			width: 100%;
+			padding-top: 0px!important;
+			margin-bottom: 0px!important;
+			padding-top: 0!important;
+			padding-right: 20px;
 		
 		
-		xxborder-bottom: solid #878787 1px;
+			@media screen and  (max-width : 540px) {
+				& {
+					padding-right: 15px; 
+				}
+			}    		
+							
+			
+			&.required:after {
+				content: "*";
+				display: inline;
+				color: red;
+				position: absolute;
+				margin-left: 5px;
+			}		
+		}
+			
+				
+
 		
-		hr {
-			background: black;
+		.form-group {
+			margin-bottom: 0!important;
+			width:100%;
+		}
+			
+
+			
+		[name=my-fName]{
+			max-width: 300px;
+		}
+		
+		[name=my-lName]{
+			max-width: 300px;
+		}
+		
+		[name=my-quantity], [name=my-amount]{
+			max-width: 100px;
+		}
+		
+		[name=my-phone]{
+			max-width: 200px;
+		}
+		
+		[name=my-address]{
+			max-width: 500px;
+		}
+		
+		
+		
+		[name=my-deliver]{
+			max-width: 300px;
+		}	
+			
+		[name=my-time]{
+			max-width: 150px;
+		}	
+				
+		
+		
+		input[type=checkbox] {
+			height: 20px;
+			width: 20px;
+			xxopacity:0;
+		}
+
+		
+		textarea{
+			resize: none;
+			height: 70px!important;
+			text-overflow: ellipsis;
+			resize: none;
+		}	
+
+
+		label.radio{
+			margin: 3px 30px 0px 0;
 			display: inline-block;
-			width: calc(50% - 55px);
-			margin: 0;
-			border-bottom: solid black 1px;
+			cursor: pointer;
+			font-weight: 500;
+			
+			input[type=radio] {
+				position: relative;
+				float: left;
+				margin: 4px 4px 0 0;
+				cursor: pointer;
+			}
+			
 		}
+
+	
+		.radio + .radio {
+			margin-top: 3px;
+		}
+
+
+		.popover{
+			font-weight: 700;
+			white-space:nowrap;
+		}	
 		
 		
-		span {
-			position: relative;
-			bottom: -4px;
-			width: 110px;
-			padding: 0px 4px;
-			display: inline-block;	
+		.header {
+			position:relative;
+			text-align:center;
+			
+			hr {
+				background: black;
+				display: inline-block;
+				width: calc(50% - 55px);
+				margin: 0;
+				border-bottom: solid black 1px;
+			}
+			
+			
+			span {
+				position: relative;
+				bottom: -4px;
+				width: 110px;
+				padding: 0px 4px;
+				display: inline-block;	
+			}
 		}
 	}
-	
-	
 }
-	
 
 	
 	

@@ -18,6 +18,8 @@ form {
 		
 	input[type=checkbox] ~ .glyphicon-ok,
 	input[type=checkbox] ~ .glyphicon-remove,
+	.radio ~ .glyphicon-ok,
+	.radio ~ .glyphicon-remove,
 	select ~ .glyphicon-ok,
 	select ~ .glyphicon-remove{
 		display:none!important;
