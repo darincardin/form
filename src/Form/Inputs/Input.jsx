@@ -29,6 +29,8 @@ class Input extends React.Component {
 		
 		var [name, value] = this.props.strategy.getEvent(e)
 		
+		if(this.props.format) value = this.props.strategy.format(value);
+		
 		this.setState({value:value})
 		
 		this.props.change(name, value, this.validate(value))

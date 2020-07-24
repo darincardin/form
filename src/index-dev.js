@@ -9,17 +9,22 @@ import 'bootstrap/dist/js/bootstrap.js';
 const newOrder = { id:"1", fName:"", lName:"", address:'', phone:"", mayo:false, quantity:"", info:'', deliver: false, time:'1'}
 
 const fields1 = [ 
-	{label:"Order Info", name:"orderInfo", 	tag:"header"  },
-	{label:"First Name", name:"fName",  	tag:"text"},
-	{label:"Address",    name:"address", 	tag:"text"},
-	{label:"Info",    	 name:"info", 	tag:"textarea"}
+	{label:"Order Info", name:"orderInfo", tag:"header"  },
+	{label:"First Name", name:"fName",     tag:"text"},
+	{label:"Info",    	 name:"info", 	   tag:"textarea"},
+	{label:"Quantity",   name:"quantity",  tag:"number", required:true,  showIf: {target: ['deliver'], test:v =>v>5 }},
+	{label:"Deliver",    name:"deliver",   tag:"radio",  showIf:{target: ['address', 'time'], test:true }, options: [
+		{value:false, label:"Pickup"},
+		{value:true,  label:"Deliver"}
+	]},
+	{label:"Address",    name:"address", tag:"text", required:true },
 ]			
 
 
 const fields2 =  [ 
 
 		{label:"Order Info",  tag:"header", name: "orderInfo"  },
-		{label:"Mayonase",    name:"mayo", tag:"checkbox" },
+		{label:"Phone",      name:"phone", tag:"phone", format:true},
 		{label:"Quantity",   name:"quantity",  tag:"number", required:true,  showIf: {target: ['deliver'], test:v =>v>5 }},
 		{label:"Deliver",    name:"deliver",   tag:"radio",  showIf:{target: ['address', 'time'], test:true }, options: [
 			{value:false, label:"Pickup"},
@@ -51,8 +56,8 @@ class Main extends React.Component {
 	}
 	
 
-	clear1 = () =>{
-		this.setState( {object1: {...newOrder} } )
+	change = () =>{
+		this.setState( {object1: {...newOrder, quantity:7} } )
 	}
 	
 	clear2 = () =>{
@@ -70,7 +75,7 @@ class Main extends React.Component {
 							<Form object={this.state.object1} onSuccess={this.onSuccess}   fields={this.state.fields1}>
 								<button className="btn btn-primary" type="submit" >Submit</button> 
 								&nbsp;
-								<button className="btn btn-default" type="button" onClick={this.clear1}>Clear</button>
+								<button className="btn btn-default" type="button" onClick={this.change}>Clear</button>
 							</Form>
 						</div>
 					</div>

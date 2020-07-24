@@ -98,6 +98,7 @@ class Form extends React.Component {
 	componentWillReceiveProps(props) {
 		this.setState({object: props.object }, ()=>{
 			this.validate();
+			this.showIf();
 			this.setState( {submitted:false} );
 		}) 
 	}

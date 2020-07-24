@@ -6,6 +6,8 @@ var Checkbox =   {
 	
 	getEvent: e =>[e.target.name, e.target.checked],
 
+	format: value =>value,
+	
 	validate: (required, value) =>{
 		return (required && Validation.required(value)) ? 'required' : '';	
 	},

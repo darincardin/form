@@ -1,11 +1,12 @@
 import React from 'react';
 import Validation from '../../Tools/Validation.js';
 
-
 var Select =   {
 
 	getEvent: e =>[e.target.name, e.target.value],
 
+	format: value =>value,
+	
 	validate: (required, value) =>{
 		return (required && Validation.required(value)) ? 'required' : '';	
 	},

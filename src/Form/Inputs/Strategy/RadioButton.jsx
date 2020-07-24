@@ -4,9 +4,9 @@ var RadioButton =   {
 	
 	getEvent: e =>[e.target.name, e.target.value==="true"?true:false],
 
-	validate: (required, value) =>{
-		return ''
-	},
+	format: value =>value,
+	
+	validate: (required, value) => '',
 
 	html: (attribs, tooltip, options) =>{
 	

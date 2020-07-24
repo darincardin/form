@@ -5,6 +5,8 @@ var TextArea =   {
 
 	getEvent: e =>[e.target.name, e.target.value],
 	
+	format: value =>value,
+	
 	validate: (required, value) =>{
 		return (required && Validation.required(value)) ? 'required' : '';	
 	},
