@@ -2,9 +2,9 @@ import React from 'react';
 import tooltip from '../Tools/Tooltip.jsx';
 import Validation  from '../Tools/Validation.js';
 
-const messages = {required:"Required", phone:"Format is xxx-xxx-xxxx"};
+const messages = {required:"Required", phone:"Format is xxx-xxx-xxxx", containsChars:"Cannot contain characters"};
 
-class Input extends React.Component {
+class Input extends React.Component { 
 
 	constructor(props){
 		super(props)
@@ -26,15 +26,28 @@ class Input extends React.Component {
 	}	
 	
 	onChange = e =>{	
-		
 		var [name, value] = this.props.strategy.getEvent(e)
-		
-		if(this.props.format) value = this.props.strategy.format(value);
 		
 		this.setState({value:value})
 		
 		this.props.change(name, value, this.validate(value))
 	}
+
+	onBlur = e =>{
+
+		var value = e.target.value;
+
+		if(this.props.format){
+
+			var formatted = this.props.strategy.format(value);
+			
+			if(formatted != value )  {
+				e.target.value = formatted;
+				this.onChange(e);					
+			}
+		}	
+	}
+
 
 	onWatch = () =>{
 		var error = this.props.error;	
@@ -51,6 +64,7 @@ class Input extends React.Component {
 			type: this.props.tag || "text",
 			name: this.props.name,
 			onChange: this.onChange,
+			onBlur: this.onBlur,
 			value: this.state.value
 		}	
 	

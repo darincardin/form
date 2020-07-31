@@ -9,7 +9,7 @@ var Checkbox =   {
 	format: value =>value,
 	
 	validate: (required, value) =>{
-		return (required && Validation.required(value)) ? 'required' : '';	
+		return (required && !Validation.exists(value)) ? 'required' : '';	
 	},
 
 	html: attribs =>{

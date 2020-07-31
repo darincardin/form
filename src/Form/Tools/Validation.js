@@ -1,13 +1,16 @@
 
 
-
 var Validation = (function()  {
 	
-	var pattern_phone = /^\d{3}-\d{3}-\d{4}$/;	
+	var pattern_phone = /^(\d{1}-)?\d{3}-\d{3}-\d{4}$/;	
 	
-	var required = value =>{ return (!value) }	
+	var pattern_chars = /^.*[a-z].*$/;
 	
-	var phone = value =>{  	return (value && !pattern_phone.test(value) ) }
+	var exists = value =>{ return (value != null && value != "") }	
+	
+	var containsChars = value =>{ return (value && pattern_chars.test(value) ) }
+	
+	var isPhone = value =>{  return (!value || pattern_phone.test(value) ) }
 
 
 	var validate = refList =>{
@@ -36,8 +39,9 @@ var Validation = (function()  {
     return {
 		validate: validate,
 		getData: getData,
-		required: required,
-		phone:phone
+		exists: exists,
+		containsChars: containsChars,
+		isPhone:isPhone
     }
 })();
 

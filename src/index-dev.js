@@ -9,14 +9,10 @@ import 'bootstrap/dist/js/bootstrap.js';
 const newOrder = { id:"1", fName:"", lName:"", address:'', phone:"", mayo:false, quantity:"", info:'', deliver: false, time:'1'}
 
 const fields1 = [ 
-	{label:"Order Info", name:"orderInfo", tag:"header"  },
-	{label:"First Name", name:"fName",     tag:"text"},
-	{label:"Info",    	 name:"info", 	   tag:"textarea"},
-	{label:"Quantity",   name:"quantity",  tag:"number", required:true,  showIf: {target: ['deliver'], test:v =>v>5 }},
-	{label:"Deliver",    name:"deliver",   tag:"radio",  showIf:{target: ['address', 'time'], test:true }, options: [
-		{value:false, label:"Pickup"},
-		{value:true,  label:"Deliver"}
-	]},
+	{label:"Order Info", name:"orderInfo", tag:"header" },
+	{label:"First Name", name:"fName",     tag:"text", required:true },
+	{label:"Info",    	 name:"info", 	   tag:"textarea" },
+	{label:"Quantity",   name:"quantity",  tag:"number",  showIf: {target: ['address'], test:v =>v>5 }},
 	{label:"Address",    name:"address", tag:"text", required:true },
 ]			
 
@@ -26,7 +22,7 @@ const fields2 =  [
 		{label:"Order Info",  tag:"header", name: "orderInfo"  },
 		{label:"Phone",      name:"phone", tag:"phone", format:true},
 		{label:"Quantity",   name:"quantity",  tag:"number", required:true,  showIf: {target: ['deliver'], test:v =>v>5 }},
-		{label:"Deliver",    name:"deliver",   tag:"radio",  showIf:{target: ['address', 'time'], test:true }, options: [
+		{label:"Deliver",    name:"deliver",   tag:"radio", showIf:{target: ['address', 'time'], test:true }, options: [
 			{value:false, label:"Pickup"},
 			{value:true,  label:"Deliver"}
 		]},
